@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анемон - Флористический салон</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(to bottom, rgba(58, 84, 58, 0.9), rgba(80, 113, 77, 0.8));
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #e1da68;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #50714d;
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: #e1da68;
+        }
+        .hero {
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(58, 84, 58, 0.6), rgba(80, 113, 77, 0.8));
+        }
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        .hero h1 span {
+            color: #e1da68;
+            display: block;
+            font-size: 4rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #e1da68;
+            color: #50714d;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .btn-secondary {
+            background-color: #50714d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #3f5a3c;
+        }
+        .section {
+            padding: 80px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 {
+            color: #e1da68;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .section-title p {
+            color: #fff;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .process-section {
+            background-color: rgba(63, 90, 60, 0.7);
+            color: white;
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 280px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #e1da68;
+            font-size: 1.5rem;
+        }
+        .catalog-section {
+            background-color: #50714d;
+            color: white;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            transition: all 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .product-image {
+            height: 250px;
+            background-color: #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #e1da68;
+            color: #50714d;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .product-info {
+            padding: 20px;
+            color: #333;
+        }
+        .product-info h3 {
+            margin-top: 0;
+            color: #50714d;
+        }
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px 20px;
+        }
+        .price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #50714d;
+        }
+        .testimonials-section {
+            background-color: rgba(63, 90, 60, 0.7);
+            color: white;
+        }
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .testimonial-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 3px solid #e1da68;
+        }
+        .stars {
+            color: #e1da68;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        .testimonial-text {
+            font-style: italic;
+            position: relative;
+            padding: 0 20px;
+        }
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: rgba(225, 218, 104, 0.3);
+            position: absolute;
+        }
+        .testimonial-text::before {
+            top: -10px;
+            left: 0;
+        }
+        .testimonial-text::after {
+            bottom: -20px;
+            right: 0;
+        }
+        footer {
+            background-color: #3a543a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero h1 span {
+                font-size: 3rem;
+            }
+            .cards, .product-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card, .product-card {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-circle">A</div>
+                <span>Анемон</span>
+            </div>
+            <nav class="nav">
+                <a href="#">Главная</a>
+                <a href="#catalog">Каталог</a>
+                <a href="#process">Как мы работаем</a>
+                <a href="#testimonials">Отзывы</a>
+                <a href="#footer">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1><span>Анемон</span> салон ваших букетов</h1>
+            <p>Красота в каждом цветке и каждом букете. Наш магазин предлагает уникальность и изысканный вкус в оформлении, ведь в деталях кроется совершенство.</p>
+            <div>
+                <a href="#catalog" class="btn">Каталог букетов</a>
+                <a href="#footer" class="btn btn-secondary">Заказать букет</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="section process-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Как мы работаем</h2>
+                <p>Каждый букет создается с любовью и проходит несколько этапов от выбора цветов до доставки</p>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🌹</div>
+                    <h3>Выбор цветов</h3>
+                    <p>Мы тщательно отбираем только самые свежие и качественные цветы для наших букетов</p>
+                    <small>Шаг 1</small>
+                </div>
+                <div class="card">
+                    <div class="card-icon">✂️</div>
+                    <h3>Создание композиции</h3>
+                    <p>Наши флористы создают уникальные композиции с вниманием к каждой детали</p>
+                    <small>Шаг 2</small>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎀</div>
+                    <h3>Упаковка</h3>
+                    <p>Каждый букет красиво упаковывается, чтобы сохранить свежесть и презентабельный вид</p>
+                    <small>Шаг 3</small>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚚</div>
+                    <h3>Доставка</h3>
+                    <p>Мы бережно доставляем букеты в указанное время, сохраняя их первозданную красоту</p>
+                    <small>Шаг 4</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="section catalog-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наш каталог цветов</h2>
+                <p>Выберите из нашей коллекции свежих букетов, созданных с любовью и вниманием к деталям</p>
+            </div>
+            <div class="cards">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1599733589046-65f4be47aab5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="product-badge">Лидер продаж</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Букет "Нежность"</h3>
+                        <p>Изысканная композиция из розовых пионов и белых роз</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">5 990 ₽</span>
+                        <button class="btn">В корзину</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1561181286-d5ee92d79705?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="product-badge">Популярный</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Букет "Свежесть"</h3>
+                        <p>Яркая композиция из сезонных цветов и зелени</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">3 990 ₽</span>
+                        <button class="btn">В корзину</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1611751098255-20e4e705aabe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+                        <div class="product-badge">Новинка</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Букет "Элегантность"</h3>
+                        <p>Классическая композиция из красных роз и ароматной зелени</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">4 590 ₽</span>
+                        <button class="btn">В корзину</button>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn">Перейти в полный каталог</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Что говорят наши клиенты</h2>
+                <p>Мы гордимся тем, что наши клиенты остаются довольны нашей работой</p>
+            </div>
+            <div class="cards">
+                <div class="testimonial-card">
+                    <div class="testimonial-image" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover;"></div>
+                    <h3>Елена Соколова</h3>
+                    <p>Постоянный клиент</p>
+                    <div class="stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        Я всегда покупаю цветы в Анемон. Их букеты невероятно свежие и красивые, а упаковка просто потрясающая. Спасибо за ваш профессионализм!
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-image" style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover;"></div>
+                    <h3>Михаил Петров</h3>
+                    <p>Новый клиент</p>
+                    <div class="stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        Недавно заказал букет для жены на годовщину. Был приятно удивлен скоростью доставки и качеством цветов. Обязательно буду заказывать снова.
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-image" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover;"></div>
+                    <h3>Анна Кузнецова</h3>
+                    <p>Корпоративный клиент</p>
+                    <div class="stars">★★★★☆</div>
+                    <div class="testimonial-text">
+                        Наша компания регулярно заказывает цветы для офиса и мероприятий. Анемон всегда предоставляет отличный сервис и прекрасные композиции. Рекомендую всем!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <h3>Свяжитесь с нами</h3>
+            <p>Телефон: +7 (961) 006-31-16</p>
+            <p>Адрес: ул. Цветочная, 123, г. Москва</p>
+            <p>Время работы: 9:00 - 20:00, без выходных</p>
+            <div style="margin-top: 20px;">
+                <p>© 2025 Анемон - салон цветов. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
