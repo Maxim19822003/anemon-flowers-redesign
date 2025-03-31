@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 135 20% 37%; /* #50714d - Anemon Green */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 60 65% 65%; /* #e1da68 - Anemon Yellow */
+    --secondary-foreground: 135 20% 37%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 135 20% 37%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 18% 10%; /* темный, но не совсем черный фон */
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 18% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 18% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 135 14% 30%; /* Приглушенный зеленый */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 60 40% 60%; /* Приглушенный желтый */
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 135 14% 30%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Темная тема для главного контейнера */
+.dark .bg-black\/40 {
+  @apply bg-gray-900/90; /* Делаем фон темнее */
+}
+
+/* Стили для темной темы карточек */
+.dark .bg-white\/90 {
+  @apply bg-gray-800/90;
+}
+
+/* Стили для темной темы текста */
+.dark .text-gray-600 {
+  @apply text-gray-300;
+}
+
+.dark .text-gray-700 {
+  @apply text-gray-300;
+}
+
+/* Стили для навбара в темной теме - сохраняем зеленый, но делаем его приглушенным */
+.dark .bg-\[\#50714d\] {
+  @apply bg-[#3a543a];
+}
+
+/* Обертка для фиксированной высоты изображения */
+.image-wrapper {
+  position: relative;
+  height: 0;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  overflow: hidden;
+}
+
+.image-wrapper > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
